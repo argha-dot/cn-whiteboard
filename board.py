@@ -108,11 +108,9 @@ class Board():
 
     def draw_grid(self):
         for i in range(self.y):
-            # pygame.gfxdraw.line(win, pygame.Color(40, 40, 40), (0, i * PIXEL_SIZE), (win_wt, i * PIXEL_SIZE))
             pygame.gfxdraw.hline(win, 0, win_wt, i * PIXEL_SIZE, pygame.Color(40, 40, 40))
 
         for i in range(self.x):
-            # pygame.draw.line(win, pygame.Color(40, 40, 40), (i * PIXEL_SIZE, 0), (i * PIXEL_SIZE, win_ht))
             pygame.gfxdraw.vline(win, i * PIXEL_SIZE, 0, win_ht, pygame.Color(40, 40, 40))
 
         for i, row in enumerate(self.board):
