@@ -1,0 +1,3 @@
+PIXEL_SIZE = 15
+WIN_WT = 800 
+WIN_HT = 600
