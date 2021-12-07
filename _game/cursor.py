@@ -2,8 +2,6 @@ import pygame
 
 from _game.vars import PIXEL_SIZE
 
-
-
 class Cursor(object):
     def __init__(self, surface):
         self.color = "#000000"

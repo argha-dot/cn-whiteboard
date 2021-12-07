@@ -4,7 +4,6 @@ import pygame
 from _game.vars import PIXEL_SIZE, WIN_HT, WIN_WT
 
 
-
 class Board():
     def __init__(self, surface):
         self.x = int(WIN_WT / PIXEL_SIZE)

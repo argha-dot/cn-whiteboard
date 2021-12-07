@@ -6,18 +6,26 @@ import os
 clients = set()
 client_lock = threading.Lock()
 
+
 def handle_client(conn, addr):
     print(f"[NEW CONN] {addr} connected.")
     
     try:
         connected = True
+
         while connected:
             msg = pickle.loads(conn.recv(4096 * 8))
+
             if msg:
-                # print(f"[ADDR {addr}] {msg}")
-                with client_lock:
-                    for c in clients:
-                        c.sendall(pickle.dumps(msg))
+                if type(msg) == str:
+                    # print(f"[ADDR {addr}] {msg}")
+                    if msg == 'q':
+                        print(f"[ADDR {addr}] {msg}")
+                        conn.sendall(pickle.dumps(msg))
+                else:
+                    with client_lock:
+                        for c in clients:
+                            c.sendall(pickle.dumps(msg))
 
     finally:
         with client_lock:
@@ -29,8 +37,10 @@ def handle_client(conn, addr):
 def start(socket):
     while True:
         conn, addr = socket.accept()
+
         with client_lock:
             clients.add(conn)
+
         thread = threading.Thread(target=handle_client, args=(conn, addr))
         thread.start()
 

@@ -9,7 +9,6 @@ class Client_Network:
         self.host = socket.gethostbyname(socket.gethostname())
         self.port = 9999
         self.addr = (self.host, self.port)
-        # self.board
 
     def connect(self):
         self.client.connect(self.addr)
