@@ -1,5 +1,5 @@
 import socket
-import time
+import sys
 import pickle
 
 
@@ -13,12 +13,11 @@ class Client_Network:
 
     def connect(self):
         self.client.connect(self.addr)
-        return self.client.recv(4069)
 
     def disconnect(self):
         self.client.close()
 
-    def send(self, data, pick=False):
+    def send(self, data, pick: bool = False):
         try:
             if pick:
                 self.client.send(pickle.dumps(data))

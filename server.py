@@ -1,5 +1,6 @@
 import socket
 import threading
+import pickle
 import os
 
 clients = set()
@@ -11,17 +12,13 @@ def handle_client(conn, addr):
     try:
         connected = True
         while connected:
-            msg = conn.recv(1024).decode("utf-8")
+            msg = pickle.loads(conn.recv(4096 * 8))
             if msg:
-                if msg.lower() == "q":
-                    print(f"[ADDR {addr}] disconnected")
-                    connected = False
-                    break
-
-                print(f"[ADDR {addr}] {msg}")
+                # print(f"[ADDR {addr}] {msg}")
                 with client_lock:
                     for c in clients:
-                        c.sendall(f"[{addr}] {msg}".encode("utf-8"))
+                        c.sendall(pickle.dumps(msg))
+
     finally:
         with client_lock:
             clients.remove(conn)

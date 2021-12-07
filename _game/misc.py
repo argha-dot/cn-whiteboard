@@ -1,16 +1,11 @@
 import sys, os
 import pygame
 
-
-def terminate():
-    pygame.quit()
-    sys.exit()
-
-
 def out_events():
     for event in pygame.event.get():
         if event.type == pygame.QUIT or (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
-            terminate()
+            pygame.quit()
+            sys.exit()
 
 
 def load_img(name):
@@ -35,7 +30,8 @@ def delay(j):
             if event.type == pygame.QUIT or \
                     (event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE):
                 i = j + 1
-                terminate()
+                pygame.quit()
+                sys.exit()
 
 
 def update_fps(fps_clock, font):
